@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { login } from "../../redux/slices/authSlice";
+import { loginUser } from "../../redux/slices/authSlice";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -10,7 +10,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await dispatch(login({ username, password }));
+      await dispatch(loginUser({ username, password }));
       // Redirigir al dashboard
     } catch (error) {
       alert(error.message);

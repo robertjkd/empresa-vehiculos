@@ -16,6 +16,39 @@ nav a {
   text-decoration: none;
 }
 
+/* Estilos generales */
+.main-content {
+  min-height: calc(100vh - 120px); /* Ajusta según altura de navbar/footer */
+  padding: 20px;
+}
+
+/* Navbar */
+.navbar {
+  background: #333;
+  color: white;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-links a {
+  color: white;
+  margin-left: 1rem;
+  text-decoration: none;
+}
+
+/* Footer */
+.footer {
+  background: #333;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
 .login-form {
   max-width: 400px;
   margin: 2rem auto;

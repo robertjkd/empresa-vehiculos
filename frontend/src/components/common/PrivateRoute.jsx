@@ -1,12 +1,16 @@
-// frontend/src/components/common/PrivateRoute.jsx
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
 const PrivateRoute = ({ children, roles }) => {
   const { user } = useSelector((state) => state.auth);
 
-  if (!user) return <Navigate to="/login" />;
-  if (roles && !roles.includes(user.role)) return <Navigate to="/" />;
+  // Si no hay usuario, redirige a login
+  if (!user) return <Navigate to="/login" replace />;
+
+  // Si hay roles requeridos y el usuario no los tiene, redirige
+  if (roles && !roles.includes(user.role)) {
+    return <Navigate to="/" replace />;
+  }
 
   return children;
 };

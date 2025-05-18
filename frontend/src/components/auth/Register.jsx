@@ -9,6 +9,7 @@ const Register = () => {
     username: "",
     password: "",
   });
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

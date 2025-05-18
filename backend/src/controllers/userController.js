@@ -1,6 +1,6 @@
 const { User } = require("../models");
 
-// RF-5: Eliminar usuario ()
+// RF-3: Eliminar usuario ()
 exports.deleteUser = async (req, res) => {
   try {
     const user = await User.destroy({
@@ -12,6 +12,28 @@ exports.deleteUser = async (req, res) => {
 
     if (!user) return res.status(404).json({ error: "Usuario no encontrado" });
     res.json({ message: "Usuario eliminado" });
+  } catch (error) {
+    res.status(500).json({ error: "Error en el servidor" });
+  }
+};
+
+//  RF-4 (MOdificar Usuario)
+exports.updateUser = async (req, res) => {
+  try {
+    const { fullName, username } = req.body;
+    const [updated] = await User.update(
+      { fullName, username },
+      {
+        where: {
+          id: req.params.id,
+          role: "cliente", // Solo modifica clientes (RF-4)
+        },
+      }
+    );
+
+    if (!updated)
+      return res.status(404).json({ error: "Usuario no encontrado" });
+    res.json({ message: "Usuario actualizado" });
   } catch (error) {
     res.status(500).json({ error: "Error en el servidor" });
   }

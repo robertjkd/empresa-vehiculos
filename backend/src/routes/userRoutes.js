@@ -7,7 +7,29 @@ const {
   listUsers,
 } = require("../controllers/userController");
 
-// RF-3, RF-5, RF-6, RF-7, RF-8
+// RF-3: Eliminar cliente (solo admin)
+router.delete(
+  "/users/:id",
+  authenticate,
+  authorize("administrador"),
+  deleteUser
+);
+
+// RF-4: Modificar cliente (admin o propio usuario)
+router.put(
+  "/users/:id",
+  authenticate,
+  (req, res, next) => {
+    // Permite al admin o al dueño de la cuenta modificar
+    if (req.user.role === "administrador" || req.user.id === req.params.id) {
+      return next();
+    }
+    res.status(403).json({ error: "Acceso prohibido" });
+  },
+  updateUser
+);
+
+//  RF-5, RF-6, RF-7, RF-8
 router.delete(
   "/users/:id",
   authenticate,

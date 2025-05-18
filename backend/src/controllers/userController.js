@@ -1,11 +1,15 @@
 const { User } = require("../models");
 
-// RF-3: Eliminar Cliente (Admin)
+// RF-5: Eliminar usuario ()
 exports.deleteUser = async (req, res) => {
   try {
     const user = await User.destroy({
-      where: { id: req.params.id, role: "cliente" },
+      where: {
+        id: req.params.id,
+        role: "cliente", // Solo elimina clientes (RF-3)
+      },
     });
+
     if (!user) return res.status(404).json({ error: "Usuario no encontrado" });
     res.json({ message: "Usuario eliminado" });
   } catch (error) {
